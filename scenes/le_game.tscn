@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=3 uid="uid://beeb8jo1f8a2a"]
+
+[ext_resource type="PackedScene" uid="uid://lpiuf3kx4p41" path="res://scenes/player.tscn" id="1_41r1g"]
+[ext_resource type="Script" uid="uid://c6vl3vgtxryx6" path="res://scripts/le_game.gd" id="1_y2ru7"]
+[ext_resource type="PackedScene" uid="uid://bwh45bvbrvs2k" path="res://scenes/key.tscn" id="2_dheyj"]
+[ext_resource type="Script" uid="uid://cnh7j8m7mcqto" path="res://scripts/static_body_3d.gd" id="3_bshh2"]
+[ext_resource type="PackedScene" uid="uid://pk23wttayf51" path="res://scenes/door.tscn" id="4_hxqbt"]
+[ext_resource type="PackedScene" uid="uid://b08a2ahqp0oac" path="res://scenes/InventoryUI.tscn" id="5_qdyee"]
+[ext_resource type="Script" uid="uid://celvqo5f0xyln" path="res://scripts/ui.gd" id="6_2fbf0"]
+[ext_resource type="PackedScene" uid="uid://brtapuu0w5n2t" path="res://scenes/cursor.tscn" id="8_hqg2r"]
+[ext_resource type="PackedScene" uid="uid://bth675loccnew" path="res://scenes/dialogue_box.tscn" id="9_6h8lf"]
+[ext_resource type="Script" uid="uid://bhcxsgyms56rl" path="res://scripts/dialogue_box.gd" id="10_qienj"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dheyj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bshh2"]
+albedo_color = Color(0.304178, 0.509415, 0.361305, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hxqbt"]
+material = SubResource("StandardMaterial3D_bshh2")
+
+[sub_resource type="Environment" id="Environment_41r1g"]
+ambient_light_color = Color(0.851769, 0.851769, 0.851769, 1)
+ambient_light_energy = 5.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_qdyee"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fbf0"]
+
+[node name="Le game" type="Node3D"]
+script = ExtResource("1_y2ru7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_41r1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05069, 0)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_dheyj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(19.9092, 0, 0, 0, 1, 0, 0, 0, 21.2575, 0, -0.485946, 0)
+mesh = SubResource("BoxMesh_hxqbt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_41r1g")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.954579, 0.297958, 0, -0.297958, 0.954579, 0.148414, 3.12076, 6.66947)
+
+[node name="Key" parent="." instance=ExtResource("2_dheyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5052, 0.846233, 6.45357)
+script = ExtResource("3_bshh2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_qdyee")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_2fbf0")
+
+[node name="Key2" parent="." instance=ExtResource("2_dheyj")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 2.54497, 1.53437, -4.98629)
+
+[node name="door" parent="." instance=ExtResource("4_hxqbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51193, 1.20642, -7.86396)
+
+[node name="UI" parent="." instance=ExtResource("5_qdyee")]
+script = ExtResource("6_2fbf0")
+
+[node name="keyCount" parent="UI/Panel" index="0"]
+metadata/_edit_use_anchors_ = true
+
+[node name="Cursor" parent="." instance=ExtResource("8_hqg2r")]
+
+[node name="Dialogue Box" parent="." instance=ExtResource("9_6h8lf")]
+script = ExtResource("10_qienj")
+
+[editable path="Player"]
+[editable path="UI"]

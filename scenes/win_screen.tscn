@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://0oy737ja0r84"]
+
+[ext_resource type="Script" uid="uid://cmey5ixby58x0" path="res://scripts/win_screen.gd" id="1_wv5lq"]
+
+[node name="winScreen" type="CanvasLayer"]
+script = ExtResource("1_wv5lq")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 52.0
+offset_right = 1054.0
+offset_bottom = 452.0
+text = "Congrats! You've made it throught the first plane of this strange world but ... what more could lie ahead ................................. (the end)"
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 140.0
+offset_right = 358.0
+offset_bottom = 290.0
+text = "Exit"
+
+[connection signal="button_down" from="Panel/Button" to="." method="_on_button_button_down"]

@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://kdqyjyvfy55c"]
+
+[ext_resource type="Script" uid="uid://d1kaors7ql805" path="res://scripts/main_title.gd" id="1_g6ret"]
+
+[node name="mainTitle" type="CanvasLayer"]
+script = ExtResource("1_g6ret")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1150.0
+offset_bottom = 650.0
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 62.0
+offset_right = 97.0
+offset_bottom = 85.0
+text = "The Fallen World (Key finding sim)"
+
+[node name="Enter" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 488.0
+offset_right = 248.0
+offset_bottom = 538.0
+text = "Play Game"
+
+[node name="Exit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 491.0
+offset_right = 512.0
+offset_bottom = 541.0
+text = "Exit"
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 893.0
+offset_top = 39.0
+offset_right = 1077.0
+offset_bottom = 218.0
+scale = Vector2(1.19645, 1.98508)
+text = "Controls:
+Inventory - Tab
+Walk - WASD
+Sprint - Shift
+Jump - Space
+Get ur mouse back - esc
+Interact - E/M1"
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 117.0
+offset_right = 549.0
+offset_bottom = 417.0
+text = "Your trek through these foreign lands led you to this strange fog. As you venture forth the fog envelops you, the fine mist flowing through the air. You notice your steps begin to shake as the earth cracks and shatters below you. The flow of gravity now dropping you towards a strange land."
+autowrap_mode = 2
+
+[connection signal="button_down" from="Panel/Enter" to="." method="_on_enter_button_down"]
+[connection signal="button_down" from="Panel/Exit" to="." method="_on_exit_button_down"]

@@ -10,16 +10,34 @@ const dialogue = {
 		1 : "Could you tell me where exactly I am... ",
 		2 : "Yea I've seen how the world is ... I still don't know where the hell I am.",
 		3 : "Grab some keys and go huh, thanks I guess."
+	},
+	"Robot Guy2" : {
+		1 : "Sick lol",
+		2 : "I already said it was cool dude...",
+		3 : "Can I help you???",
+		4 : "Buzz off already...",
+		5 : "Do you mind..."
+	},
+	"slenderman" : {
+		1 : "Find my pag... I mean keys.",
+	},
+	"note" : {
+		1 : "Most of the text is scratched or too hard to read...",
+		2 : "All I can make out is something about doors and keys..."
 	}
 }
 
 var dialogueTracker = {
 	"Robot Guy1" : 1,
+	"Robot Guy2" : 1,
+	"slenderman" : 1,
+	"note" : 1,
 }
 @onready var character: Sprite2D = $Panel/Character
 @onready var dialogueDisplay: Label = $Panel/Dialogue
 var robotTexture = load("res://assets/robotDefault.webp")
 var MCTexture = load("res://assets/MCDefault.webp")
+var slenderTexture = load("res://assets/14.webp")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -32,10 +50,13 @@ func _process(delta: float) -> void:
 func playDialogue(char, MCtracker = 1):
 	print("Displaying text")
 	visible = true
-	if char == "Robot Guy1":
+	if char == "Robot Guy1" or char == "Robot Guy2":
 		character.texture = robotTexture
-	elif char == "MC":
+	elif char == "note":
 		character.texture = MCTexture
+	elif char == "slenderman":
+		character.texture = slenderTexture
+		
 		
 	if dialogueTracker[char] <= dialogue[char].size():
 		dialogueDisplay.text = dialogue[char][dialogueTracker[char]]

@@ -7,6 +7,8 @@ var object = Object
 @onready var dialogue_box: CanvasLayer = $"../Dialogue Box"
 @onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
 @onready var timer: Timer = $Timer
+@onready var key_anim: CanvasLayer = $"../keyAnim"
+@onready var animated_sprite_2d: AnimatedSprite2D = $"../keyAnim/AnimatedSprite2D"
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -78,6 +80,9 @@ func _input(event: InputEvent) -> void:
 					print("Picked up: ", target.name)
 					LeGame.inventory["key_count"] = LeGame.inventory.get("key_count", 0) + 1 #Adds to the key count so key names dont matter
 					target.queue_free()
+					key_anim.visible = true
+					animated_sprite_2d.frame = 0
+					animated_sprite_2d.play("grabKey")
 				elif target.is_in_group("Door"): #If its a door do this
 					print("Attempting to open door")
 					if LeGame.inventory["key_count"] > 0:

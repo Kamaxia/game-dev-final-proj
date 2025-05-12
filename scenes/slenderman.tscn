@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cetd7be1rr588"]
+
+[ext_resource type="Texture2D" uid="uid://darp2shulx8bv" path="res://assets/Example.webp" id="1_aeja0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xj8yx"]
+size = Vector3(0.478455, 0.549927, 0.514099)
+
+[node name="slenderman" type="StaticBody3D" groups=["Interactable", "NPC"]]
+collision_layer = 2
+collision_mask = 3
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0009
+billboard = 1
+texture = ExtResource("1_aeja0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0194397, 0.0459595, -0.0384216)
+shape = SubResource("BoxShape3D_xj8yx")

@@ -1,0 +1,60 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2f3hpnslfc4l"]
+
+[ext_resource type="Texture2D" uid="uid://b0u1t6ybgef5i" path="res://assets/anim/frame1.webp" id="1_5ybwm"]
+[ext_resource type="Texture2D" uid="uid://b131yabxk8lt2" path="res://assets/anim/frame2.webp" id="2_cd5n6"]
+[ext_resource type="Texture2D" uid="uid://cspmqpaiyyd7w" path="res://assets/anim/frame3.webp" id="3_rvg2k"]
+[ext_resource type="Texture2D" uid="uid://bu1gn0k8dvso5" path="res://assets/anim/frame4.webp" id="4_lkby1"]
+[ext_resource type="Texture2D" uid="uid://c7hpagip2v4vk" path="res://assets/anim/frame5.webp" id="5_1wc8s"]
+[ext_resource type="Texture2D" uid="uid://gddf2hcwqbb8" path="res://assets/anim/frame6.webp" id="6_kmbpg"]
+[ext_resource type="Texture2D" uid="uid://b1vbf0okn1pol" path="res://assets/anim/frame7.webp" id="7_u4187"]
+[ext_resource type="Texture2D" uid="uid://04n4ft8fpae" path="res://assets/anim/frame8.webp" id="8_51xlk"]
+[ext_resource type="Texture2D" uid="uid://cf04g2j2cheif" path="res://assets/anim/frame9.webp" id="9_j7omt"]
+[ext_resource type="Texture2D" uid="uid://dobuvvn027bob" path="res://assets/anim/frame10.webp" id="10_ncftw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ayfld"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5ybwm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cd5n6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_rvg2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lkby1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1wc8s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_kmbpg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u4187")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_51xlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j7omt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ncftw")
+}],
+"loop": true,
+"name": &"grabKey",
+"speed": 15.0
+}]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D"]
+sprite_frames = SubResource("SpriteFrames_ayfld")
+animation = &"grabKey"
+frame_progress = 0.00117473

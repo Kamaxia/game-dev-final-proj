@@ -4,7 +4,9 @@ extends CharacterBody3D
 @onready var grab_range: RayCast3D = $Neck/grabRange
 var object = Object
 @onready var key: StaticBody3D = $"../Key"
-
+@onready var dialogue_box: CanvasLayer = $"../Dialogue Box"
+@onready var audio_stream_player_3d: AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var timer: Timer = $Timer
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -12,6 +14,7 @@ const sprintSpeed = 10.0
 
 func _ready() -> void:
 	grab_range.target_position = Vector3(0, 0, -5)
+	timer.timeout.connect(_on_step_timer_timeout)
 
 func _process(delta: float) -> void:
 	pass
@@ -19,7 +22,7 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += (get_gravity() * .75) * delta
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -31,6 +34,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("moveLeft", "moveRight", "moveForward", "moveBack")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		if not timer.is_stopped():
+			pass  # Already running
+		else:
+			timer.start(0.01)  # Tiny delay before first footstep
 		if Input.is_action_pressed("sprint"):
 			velocity.x = direction.x * sprintSpeed
 			velocity.z = direction.z * sprintSpeed
@@ -38,6 +45,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction.x * SPEED
 			velocity.z = direction.z * SPEED
 	else:
+		timer.stop()
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
@@ -61,7 +69,7 @@ func _input(event: InputEvent) -> void:
 		#Interaction Login
 		if grab_range.is_colliding(): #Checks if raycast is colliding
 			var target = grab_range.get_collider() #Assigns raycast to the target object
-			while target and not (target.is_in_group("Collectible") or target.is_in_group("Door")): #Ensures target exists and constantly loops until it finds a target with the proper tag
+			while target and not (target.is_in_group("Interactable")): #Ensures target exists and constantly loops until it finds a target with the proper tag
 				target = target.get_parent() #Sets the target to the actual object rather than the collision shape
 				
 				
@@ -77,16 +85,19 @@ func _input(event: InputEvent) -> void:
 						print("Opening Door")
 						print("Current key count: ", LeGame.inventory["key_count"])
 						target.call_deferred("queue_free")
+				elif target.is_in_group("NPC"):
+					print("Interacting with npc")
+					dialogue_box.playDialogue(target.name)
 				else: #Anything else do this (debug)
 					print("Hit object, but it's not collectible.")
 		else: #Extra debug
 			print("Nothing to interact with.")
-	
-	if Input.is_action_just_pressed("openInventory"):
-		#Inventory Logic
-		if LeGame.inventory:
-			pass
-		pass
+
+func _on_step_timer_timeout():
+	if velocity > Vector3(0, 0, 0): 
+		audio_stream_player_3d.pitch_scale = randf_range(0.8, 1.2)
+		audio_stream_player_3d.play()
+		timer.start(0.3) 
 		
 		
 	

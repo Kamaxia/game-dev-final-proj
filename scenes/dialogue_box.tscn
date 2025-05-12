@@ -22,3 +22,7 @@ offset_right = 1110.0
 offset_bottom = 223.0
 text = "Blah Blah blah"
 autowrap_mode = 2
+
+[node name="Character" type="Sprite2D" parent="Panel"]
+position = Vector2(933, -197)
+scale = Vector2(0.544417, 0.475695)

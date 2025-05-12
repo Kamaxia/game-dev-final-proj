@@ -1,19 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://lpiuf3kx4p41"]
+[gd_scene load_steps=5 format=3 uid="uid://lpiuf3kx4p41"]
 
 [ext_resource type="Script" uid="uid://4a5f2p74ihqn" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://mi7vtputbsci" path="res://assets/audiomass-output.mp3" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://drq1g1jfbfauf" path="res://assets/MCDefault.webp" id="3_qhqgy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_3vyb7"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_u8vuu")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_3vyb7")
 
 [node name="Neck" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309474, 0)
@@ -25,3 +22,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0241211, 0.0974633, -0.457
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -0.0241211, 0.0974633, -0.457146)
 collision_mask = 2
 hit_from_inside = true
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_g2els")
+volume_db = -10.0
+max_db = -5.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0024
+billboard = 2
+texture = ExtResource("3_qhqgy")

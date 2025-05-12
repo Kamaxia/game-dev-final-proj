@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7m4d33c0j1wx"]
+
+[ext_resource type="Texture2D" uid="uid://cic1xr3nx87dj" path="res://assets/robotDefault.webp" id="1_td6yo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mwl8j"]
+size = Vector3(0.713867, 1.83081, 0.577881)
+
+[node name="RobotGuy" type="StaticBody3D" groups=["Interactable", "NPC"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0025
+billboard = 2
+texture = ExtResource("1_td6yo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0102539, -0.00476074, 0.0325928)
+shape = SubResource("BoxShape3D_mwl8j")
